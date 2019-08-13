@@ -2,10 +2,12 @@
 
 Thêm nội dung sau vào tệp tin /etc/my.cnf, mở rộng trong phần [mysqld]
 
->slow_query_log = 1
+```
+slow_query_log = 1
 long_query_time = 1
 slow_query_log_file = /var/log/mysql/slow-query.log
 log_queries_not_using_indexes=ON
+```
 
 Trong đó:
 
