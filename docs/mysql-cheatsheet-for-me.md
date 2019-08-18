@@ -25,7 +25,7 @@ CREATE TABLE Users(
 ) ENGINE = InnoDB
 ```
 
-**show column names**
+**Show table structure**
 
 syntax:
 
@@ -152,11 +152,16 @@ as
 
 - **WHERE LIKE** sử dụng lọc dữ liệu theo phương thức so khớp
 
-Like kết hợp với một số kí tự đặc biệt để so khớp như %, - Trong đó: kí hiệu % dùng để đại diện cho 0 hoặc nhiều kí tự bất kỳ; kí hiệu _ dùng đại diện cho một kí tự bất kỳ
+Like kết hợp với một số kí tự đặc biệt để so khớp như **%, -**
+Trong đó: kí hiệu % dùng để đại diện cho 0 hoặc nhiều kí tự bất kỳ; kí hiệu _ dùng đại diện cho một kí tự bất kỳ
 
 ex:
 
 `select * from vnn.Users where username like '_ack%'`
+
+**Count records**
+
+
 
 # II. Quản trị hệ thống mysql
 
@@ -185,8 +190,7 @@ mysql> UPDATE user SET Password=PASSWORD('new-password') WHERE user='root';
 mysql> FLUSH PRIVILEGES;
 ```
 
-Read more: http://www.yolinux.com/TUTORIALS/LinuxTutorialMySQL.html
-
+**Note**: Chỉ sử dụng `flush privileges` khi các trường hợp sử dụng tham số như UPDATE, INSERT, DELETE
 
 **Tối ưu MySQL Query Cache**
 
@@ -260,3 +264,12 @@ Thay vnn với tên database cần query
 **Kiểm tra cú pháp cho tệp tin cấu hình mysql**
 
 `/usr/sbin/mysqld — verbose — help`
+
+**
+
+**Read more>**
+
+- [http://www.yolinux.com/TUTORIALS/LinuxTutorialMySQL.html](http://www.yolinux.com/TUTORIALS/LinuxTutorialMySQL.html)
+- []()
+
+
