@@ -52,9 +52,9 @@ Syntax:
 
 Trong đó:
 
-user-name là tên người dùng được phép thực thực backup database
-db-name là tên database cần được backup
---opt là giá trị tùy chọn cho mysqldump
+>user-name là tên người dùng được phép thực thực backup database
+>db-name là tên database cần được backup
+>--opt là giá trị tùy chọn cho mysqldump
  
 - Backup full database
 
@@ -111,7 +111,7 @@ max_binlog_size = 100M
 
 `gunzip < [backupfile.sql.gz] | mysql -u user-name -p db-name`
 
-- Sử dụng tham số -e
+- Sử dụng flag -e
 
 `mysql -u user-name -p -e "source /path/to/backup-file.sql" db-name`
 
@@ -122,7 +122,7 @@ source (\.) dùng để thực hiện một tệp script sql được chỉ đ�
 
 - Restore với database đã tồn tại
 
-Sử dụng tool mysqlimport
+- Sử dụng tool mysqlimport
 
 `mysqlimport -u user-name -p db-name /path/to/backup-file.sql`
 
