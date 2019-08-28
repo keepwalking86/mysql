@@ -14,8 +14,17 @@ IP Addresses:
 yum localinstall https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
 yum install mysql-community-server -y
 ```
+- Start mysqld service
 
-- Run security setting
+`systemctl start mysqld`
+
+- Get Temporary root Password
+
+`grep 'A temporary password' /var/log/mysqld.log |tail -1`
+
+2019-02-24T04:19:59.256962Z 1 [Note] A temporary password is generated for root@localhost: Fbx.j-5qpB#q
+
+- Initial MySQL Configuration
 
 `mysql_secure_installation`
 
