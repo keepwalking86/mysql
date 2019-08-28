@@ -6,8 +6,8 @@
 
 - [Backup Restore Database](docs/backup-restore.md)
 
-- [System Administration](docs/quan-tri-he-thong.md)
+- [System Administration](docs/system-administration.md)
 
-- [Some script for me](script/)
+- [Some script for me](https://github.com/keepwalking86/mysql/tree/master/scripts)
 
 Updating ...
