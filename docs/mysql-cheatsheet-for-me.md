@@ -1,4 +1,4 @@
-# I. Một số lệnh thường dùng trong mysql
+# Một số lệnh thường dùng trong mysql
 
 **Create a database**
 
@@ -49,7 +49,9 @@ mysql>decribe Users;
 **Tạo Unique trong MySQL**
 
 unique dùng để thiết lập giá trị của column (trường ) là duy nhất, không lặp lại giá trị.
+
 Thêm giá trị `UNIQUE` vào field mà chúng ta muốn thiết lập.
+
 ex:
 
 ```
@@ -82,9 +84,9 @@ ALTER TABLE Users ADD UNIQUE(username);
 ALTER TABLE Users ADD UNIQUE(email);
 ```
 
-**How to know storage engine used of a database?**
+**How to know storage engine**
 
-một số engine phổ biến như innodb, myisam,...
+Một số engine phổ biến như innodb, myisam,...
 
 syntax:
 
@@ -108,7 +110,7 @@ use vnn;
 insert into Users(username, email) values ('Hacker', 'vnn@hacker.vn');
 ```
 
-**show information dữ liệu**
+**Show information dữ liệu**
 
 Show thông tin từ một table với `SELECT`
 
@@ -153,6 +155,7 @@ as
 - **WHERE LIKE** sử dụng lọc dữ liệu theo phương thức so khớp
 
 Like kết hợp với một số kí tự đặc biệt để so khớp như **%, -**
+
 Trong đó: kí hiệu % dùng để đại diện cho 0 hoặc nhiều kí tự bất kỳ; kí hiệu _ dùng đại diện cho một kí tự bất kỳ
 
 ex:
@@ -161,115 +164,18 @@ ex:
 
 **Count records**
 
+syntax:
 
+`COUNT(expression)`
 
-# II. Quản trị hệ thống mysql
+ex: count tất cả row trong tables users của hacker database
 
-**Thiết lập mật khẩu cho tài khoản root**
+`SELECT COUNT(*) FROM hacker.users;`
 
-- Thiết lập secure với mysql_secure_installation script
+**Count tables in a database**
 
-```
-systemctl start mysqld
-mysql_secure_installation
-```
+`SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='database-name';`
 
-hoặc sử dụng tool **mysqladmin** khi chạy tạo root password lần đầu tiên
+**Count records for all tables**
 
-`mysqladmin -u root password 'new-password'`
-
-- Đổi root password với các cách sau
-
-`mysqladmin -u root -pold-password password 'new-password'`
-
-hoặc
-
-```
-mysql> USE mysql;
-mysql> UPDATE user SET Password=PASSWORD('new-password') WHERE user='root';
-mysql> FLUSH PRIVILEGES;
-```
-
-**Note**: Chỉ sử dụng `flush privileges` khi các trường hợp sử dụng tham số như UPDATE, INSERT, DELETE
-
-**Tối ưu MySQL Query Cache**
-
-Kích hoạt chế độ cache MySQL Query để tăng khả năng truy vấn database mysql
-
-- Check trạng thái query cache hiện tại
-
-```
-mysql -u root -p
-show variables like 'query_cache_%';
-```
-
-+------------------------------+---------+
-| Variable_name                | Value   |
-+------------------------------+---------+
-| query_cache_limit            | 1048576 |
-| query_cache_min_res_unit     | 4096    |
-| query_cache_size             | 1048576 |
-| query_cache_type             | OFF     |
-| query_cache_wlock_invalidate | OFF     |
-+------------------------------+---------+
-5 rows in set (0,00 sec)
-
-
-- Thêm nội dung sau vào tệp tin my.cnf trong phần [mysqld]
-
-```
-query_cache_type = 1
-query_cache_size = 4096M ; Kích thước tối đã query được cache, mặc định 1048576 B
-query_cache_limit = 2M ; Kích thước tối của một kết quả query riêng lẻ có thể cache, mặc định là 1M
-```
-
-- Sau đó restart mysqld service
-
-`systemctl restart mysqld`
-
-**Show database size**
-
-- Show size mỗi database trong toàn bộ databases
-
-Tính theo MB (làm tròn)
-
-`SELECT table_schema AS "DB Name", ROUND(SUM(data_length + index_length) / 1024 / 1024 , 1) AS "Size (MB)" FROM information_schema.TABLES GROUP BY table_schema;`
-
-Tính theo GB (làm tròn)
-
-`SELECT table_schema AS "DB Name", ROUND(SUM(data_length + index_length) / 1024 / 1024 / 1024 , 1) AS "Size (GB)" FROM information_schema.TABLES GROUP BY table_schema;`
-
-- show size của một database
-
-`SELECT table_schema AS "DB Name", ROUND(SUM(data_length + index_length) / 1024 / 1024 , 1) AS "Size (MB)" FROM information_schema.TABLES WHERE table_schema = "vnn";`
-
-Thay vnn bằng tên database cần query
-
-- Show size của tables
-
-```
-SELECT table_name AS "Table Name",
-ROUND(((data_length + index_length) / 1024 / 1024), 2) AS "Size in (MB)"
-FROM information_schema.TABLES
-WHERE table_schema = "vnn"
-ORDER BY (data_length + index_length) DESC;
-```
-
-Thay vnn với tên database cần query
-
-- Ngoài ra, có thể xem kích thước bằng dung lượng trên disk
-
-`sudo du -sh /var/lib/mysql`
-
-**Kiểm tra cú pháp cho tệp tin cấu hình mysql**
-
-`/usr/sbin/mysqld — verbose — help`
-
-**
-
-**Read more>**
-
-- [http://www.yolinux.com/TUTORIALS/LinuxTutorialMySQL.html](http://www.yolinux.com/TUTORIALS/LinuxTutorialMySQL.html)
-- []()
-
-
+`SELECT SUM(TABLE_ROWS) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='database-name';`
