@@ -135,13 +135,16 @@ mysql> SHOW SLAVE STATUS \G;
 
 Show master status của node2 để lấy thông tin cho cấu hình `CHANGE MASTER TO` cho node1
 
+```
 mysql> SHOW MASTER STATUS;
+
 +------------------+----------+--------------+-------------------------+-------------------+
 | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB        | Executed_Gtid_Set |
 +------------------+----------+--------------+-------------------------+-------------------+
 | mysql-bin.000008 | 175      |              | test,information_schema |                   |
 +------------------+----------+--------------+-------------------------+-------------------+
 1 row in set (0.00 sec)
+```
 
 **STEP6: CONFIGURE CHANGE MASTER ON NODE1**
 
