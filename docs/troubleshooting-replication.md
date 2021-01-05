@@ -15,7 +15,7 @@ mysql -u root -p
 mysql>STOP SLAVE;
 mysql>FLUSH TABLES WITH READ LOCK;
 mysql>SHOW MASTER STATUS;
-
+```
 
 **On Node2**
 
