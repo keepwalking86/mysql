@@ -151,12 +151,13 @@ mysql> SHOW MASTER STATUS;
 ```
 node1#mysql -u root -p
 mysql>CHANGE MASTER TO MASTER_HOST='IP-ADD-NODE2', MASTER_USER='replicator', MASTER_PASSWORD='P@ssw0rd', MASTER_PORT=3306, MASTER_LOG_FILE='mysql-bin.000008', MASTER_LOG_POS=175;
+mysql>START SLAVE;
 ```
 
 **STEP7: CHECK REPLICATION ON NODE1**
 
 ```
-node2#mysql -u root -p
+node1#mysql -u root -p
 mysql> SHOW SLAVE STATUS \G;
 ```
 
